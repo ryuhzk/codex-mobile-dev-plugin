@@ -9,3 +9,5 @@ For local development link @muqun/desktop and install the MCP SDK dependency, th
 ## Interactive device panel
 
 Choose **Open interactive device panel**. Desktop opens a terminal tab and launches the session-owned page in your browser. Alternatively, in a Muqun terminal run `bun panel.ts` from this directory and open the printed loopback URL. The upstream panel owns device selection, mirroring, logs and performance controls. Keep the terminal running while using the panel, then press Enter to stop its MCP server. The link is private to the session. Hardware support follows the upstream runtime and OS.
+
+The optional standalone tarball includes the version-matched upstream backend and notices. It works without a Codex plugin installation. From a source checkout run `bun pack-runtime.ts /path/to/prebuilt/mobile-dev` to create it under release/. The bundled upstream native helpers retain their original platform requirements.

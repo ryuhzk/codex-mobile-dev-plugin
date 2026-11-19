@@ -1,11 +1,14 @@
 import { existsSync, readdirSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 
 export function serverRoot(): string | undefined {
-  if (process.env.MOBILE_DEV_ROOT) return process.env.MOBILE_DEV_ROOT;
+  if (process.env.MOBILE_DEV_ROOT) return resolve(process.env.MOBILE_DEV_ROOT);
+  const bundled = fileURLToPath(new URL("./backend/", import.meta.url));
+  if (existsSync(join(bundled, "dist/server.mjs"))) return bundled;
   const cache = join(
     process.env.CODEX_HOME || join(homedir(), ".codex"),
     "plugins",
